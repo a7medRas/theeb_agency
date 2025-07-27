@@ -222,7 +222,7 @@
         <h3>رفع ملفات الموسيقى والفيديو</h3>
         <input type="file" id="fileInput" accept="audio/*, video/*" multiple onchange="handleFiles()">
         
-        <ul id="mediaList" class="media-list"></ul>
+        <ul id="mediaList"></ul>
 
         <!-- مشغل الموسيقى والفيديو -->
         <div id="mediaPlayerContainer">
@@ -238,6 +238,12 @@
                 <div id="progressBar" style="width: 0;"></div>
             </div>
         </div>
+
+        <h3>راديو مباشر</h3>
+        <audio id="radioPlayer" class="media-player" controls>
+            <source src="https://your-radio-stream-url.com" type="audio/mp3">
+            متصفحك لا يدعم مشغل الصوت.
+        </audio>
 
         <!-- أيقونات خدمات الموسيقى والفيديو -->
         <div class="service-icons">
