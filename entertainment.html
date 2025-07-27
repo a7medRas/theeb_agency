@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الترفيه - وكالة ذيب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <!-- إضافة FontAwesome لتحميل الأيقونات -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -64,6 +66,15 @@
             display: block;
             width: 50%;
         }
+        .service-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .service-icons i {
+            font-size: 40px;
+            margin: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -80,34 +91,57 @@
         <h2>أنشطتنا الترفيهية</h2>
         <p>نقدم لك مجموعة من الأنشطة الترفيهية التي تضمن لك قضاء وقت ممتع. من الحفلات الموسيقية والعروض الكوميدية إلى ورش العمل الترفيهية، هناك دائمًا شيء مثير لك!</p>
 
-        <!-- قائمة تشغيل الموسيقى -->
-        <h3>قائمة تشغيل الموسيقى</h3>
-        <audio controls>
-            <source src="song1.mp3" type="audio/mp3">
-            <source src="song2.mp3" type="audio/mp3">
-            <source src="song3.mp3" type="audio/mp3">
+        <!-- عرض أيقونات YouTube و SoundCloud و Spotify -->
+        <div class="service-icons">
+            <!-- أيقونة YouTube -->
+            <i class="fab fa-youtube" onclick="window.open('https://www.youtube.com', '_blank')"></i>
+            <!-- أيقونة SoundCloud -->
+            <i class="fab fa-soundcloud" onclick="window.open('https://www.soundcloud.com', '_blank')"></i>
+            <!-- أيقونة Spotify -->
+            <i class="fab fa-spotify" onclick="window.open('https://www.spotify.com', '_blank')"></i>
+        </div>
+
+        <h3>رفع وتشغيل الموسيقى من جهازك</h3>
+        <!-- رفع وتشغيل ملف موسيقى -->
+        <input type="file" id="audioInput" accept="audio/*" onchange="playAudio()">
+        <audio id="audioPlayer" class="audio-player" controls>
             متصفحك لا يدعم مشغل الصوت.
         </audio>
 
-        <!-- YouTube -->
-        <h3>استماع إلى YouTube</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        <!-- SoundCloud -->
-        <h3>استماع إلى SoundCloud</h3>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/TRACK_ID&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false"></iframe>
-
-        <!-- Spotify -->
-        <h3>استماع إلى Spotify</h3>
-        <iframe src="https://open.spotify.com/embed/track/TRACK_ID" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-        <!-- بث مباشر -->
-        <h3>بث مباشر</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID" frameborder="0" allowfullscreen></iframe>
+        <h3>رفع وتشغيل الفيديو من جهازك</h3>
+        <!-- رفع وتشغيل ملف فيديو -->
+        <input type="file" id="videoInput" accept="video/*" onchange="playVideo()">
+        <video id="videoPlayer" class="video-player" controls>
+            متصفحك لا يدعم مشغل الفيديو.
+        </video>
     </section>
 
     <footer>
         <p>&copy; 2025 وكالة ذيب - جميع الحقوق محفوظة</p>
     </footer>
+
+    <script>
+        // وظيفة تشغيل الموسيقى
+        function playAudio() {
+            const audioInput = document.getElementById("audioInput");
+            const audioPlayer = document.getElementById("audioPlayer");
+
+            const file = audioInput.files[0];
+            const objectURL = URL.createObjectURL(file);
+            audioPlayer.src = objectURL;
+            audioPlayer.play();
+        }
+
+        // وظيفة تشغيل الفيديو
+        function playVideo() {
+            const videoInput = document.getElementById("videoInput");
+            const videoPlayer = document.getElementById("videoPlayer");
+
+            const file = videoInput.files[0];
+            const objectURL = URL.createObjectURL(file);
+            videoPlayer.src = objectURL;
+            videoPlayer.play();
+        }
+    </script>
 </body>
 </html>
