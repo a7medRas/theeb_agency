@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #6A4E23, #FFD700); /* خلفية متدرجة */
+            background: linear-gradient(135deg, #6A4E23, #FFD700);
             margin: 0;
             padding: 0;
         }
@@ -118,6 +118,49 @@
             background-color: #FFD700;
             width: 0;
             border-radius: 5px;
+        }
+
+        /* تحسين العرض على الموبايل */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 28px;
+            }
+            nav a {
+                font-size: 16px;
+            }
+            section {
+                padding: 20px;
+                margin: 10px;
+            }
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .media-player {
+                width: 100%;
+                max-width: none;
+            }
+            .service-icons i {
+                font-size: 40px;
+            }
+            .media-item {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+        /* تحسين العرض على الهواتف الصغيرة */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+            .cta-button {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .service-icons i {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
