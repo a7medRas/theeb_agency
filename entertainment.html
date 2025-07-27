@@ -37,26 +37,6 @@
             background-color: #fff;
             border-radius: 5px;
         }
-        .activity-card {
-            display: inline-block;
-            width: 30%;
-            margin: 15px;
-            padding: 15px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .activity-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .activity-card h3 {
-            color: #6A4E23;
-        }
-        .activity-card p {
-            color: #333;
-        }
         footer {
             background-color: #6A4E23;
             color: #FFD700;
@@ -65,6 +45,11 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+        }
+        .audio-player, .video-player {
+            margin: 20px auto;
+            display: block;
+            width: 50%;
         }
         .cta-button {
             background-color: #FFD700;
@@ -78,16 +63,6 @@
         .cta-button:hover {
             background-color: #6A4E23;
             color: #FFD700;
-        }
-        .audio-player {
-            margin: 20px auto;
-            display: block;
-            width: 50%;
-        }
-        .video-player {
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
         }
     </style>
 </head>
@@ -105,51 +80,48 @@
         <h2>أنشطتنا الترفيهية</h2>
         <p>نقدم لك مجموعة من الأنشطة الترفيهية التي تضمن لك قضاء وقت ممتع. من الحفلات الموسيقية والعروض الكوميدية إلى ورش العمل الترفيهية، هناك دائمًا شيء مثير لك!</p>
 
-        <!-- مشغل الموسيقى -->
-        <audio class="audio-player" controls>
-            <source src="path/to/your/music.mp3" type="audio/mp3">
+        <!-- رفع وتشغيل ملف الموسيقى -->
+        <h3>اختر ملف موسيقى لتشغيله</h3>
+        <input type="file" id="audioInput" accept="audio/*" onchange="playAudio()">
+        <audio id="audioPlayer" class="audio-player" controls>
             متصفحك لا يدعم مشغل الصوت.
         </audio>
 
-        <div class="activity-card">
-            <img src="event1.jpg" alt="عرض كوميدي">
-            <h3>عرض كوميدي</h3>
-            <p>استمتع بليلة مليئة بالضحك في عرض كوميدي حصري تنظمه وكالة ذيب.</p>
-            <button class="cta-button">التسجيل الآن</button>
-        </div>
-
-        <div class="activity-card">
-            <img src="event2.jpg" alt="حفلة موسيقية">
-            <h3>حفلة موسيقية</h3>
-            <p>اجعل ليلتك مميزة في حفلة موسيقية مع ألمع النجوم في الفن.</p>
-            <button class="cta-button">التسجيل الآن</button>
-        </div>
-
-        <div class="activity-card">
-            <img src="event3.jpg" alt="ورشة ترفيهية">
-            <h3>ورشة ترفيهية</h3>
-            <p>انضم إلى ورش العمل الترفيهية التي نقدمها لتحسين مهاراتك في العروض والتقديم.</p>
-            <button class="cta-button">التسجيل الآن</button>
-        </div>
-
-        <h2>أبرز الأنشطة في هذا الشهر</h2>
-        <div class="activity-card">
-            <img src="event4.jpg" alt="فعالية مميزة">
-            <h3>فعالية مميزة</h3>
-            <p>فعالية فريدة من نوعها هذا الشهر! لا تفوت الفرصة!</p>
-            <button class="cta-button">التسجيل الآن</button>
-        </div>
-
-        <!-- عارض الفيديوهات -->
-        <h2>مشاهد من فعاليات سابقة</h2>
-        <video class="video-player" controls>
-            <source src="path/to/your/video.mp4" type="video/mp4">
+        <!-- رفع وتشغيل ملف الفيديو -->
+        <h3>اختر ملف فيديو لتشغيله</h3>
+        <input type="file" id="videoInput" accept="video/*" onchange="playVideo()">
+        <video id="videoPlayer" class="video-player" controls>
             متصفحك لا يدعم مشغل الفيديو.
         </video>
+
     </section>
 
     <footer>
         <p>&copy; 2025 وكالة ذيب - جميع الحقوق محفوظة</p>
     </footer>
+
+    <script>
+        // وظيفة تشغيل الموسيقى
+        function playAudio() {
+            const audioInput = document.getElementById("audioInput");
+            const audioPlayer = document.getElementById("audioPlayer");
+
+            const file = audioInput.files[0];
+            const objectURL = URL.createObjectURL(file);
+            audioPlayer.src = objectURL;
+            audioPlayer.play();
+        }
+
+        // وظيفة تشغيل الفيديو
+        function playVideo() {
+            const videoInput = document.getElementById("videoInput");
+            const videoPlayer = document.getElementById("videoPlayer");
+
+            const file = videoInput.files[0];
+            const objectURL = URL.createObjectURL(file);
+            videoPlayer.src = objectURL;
+            videoPlayer.play();
+        }
+    </script>
 </body>
 </html>
