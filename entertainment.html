@@ -37,6 +37,26 @@
             background-color: #fff;
             border-radius: 5px;
         }
+        .activity-card {
+            display: inline-block;
+            width: 30%;
+            margin: 15px;
+            padding: 15px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .activity-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .activity-card h3 {
+            color: #6A4E23;
+        }
+        .activity-card p {
+            color: #333;
+        }
         footer {
             background-color: #6A4E23;
             color: #FFD700;
@@ -46,11 +66,35 @@
             width: 100%;
             bottom: 0;
         }
+        .cta-button {
+            background-color: #FFD700;
+            color: #5A3D1D;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .cta-button:hover {
+            background-color: #6A4E23;
+            color: #FFD700;
+        }
+        .audio-player {
+            margin: 20px auto;
+            display: block;
+            width: 50%;
+        }
+        .video-player {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>الترفيه</h1>
+        <p>استمتع بالأنشطة الترفيهية التي نقدمها للمذيعين والعملاء في وكالة ذيب</p>
     </header>
 
     <nav>
@@ -58,8 +102,50 @@
     </nav>
 
     <section>
-        <h2>قريبًا ستتوفر معلومات القسم</h2>
-        <p>قريبًا سيتم إضافة تفاصيل حول الأنشطة الترفيهية التي ستنظمها الوكالة، وتواريخها، والمزيد من المعلومات.</p>
+        <h2>أنشطتنا الترفيهية</h2>
+        <p>نقدم لك مجموعة من الأنشطة الترفيهية التي تضمن لك قضاء وقت ممتع. من الحفلات الموسيقية والعروض الكوميدية إلى ورش العمل الترفيهية، هناك دائمًا شيء مثير لك!</p>
+
+        <!-- مشغل الموسيقى -->
+        <audio class="audio-player" controls>
+            <source src="music.mp3" type="audio/mp3">
+            متصفحك لا يدعم مشغل الصوت.
+        </audio>
+
+        <div class="activity-card">
+            <img src="event1.jpg" alt="عرض كوميدي">
+            <h3>عرض كوميدي</h3>
+            <p>استمتع بليلة مليئة بالضحك في عرض كوميدي حصري تنظمه وكالة ذيب.</p>
+            <button class="cta-button">التسجيل الآن</button>
+        </div>
+
+        <div class="activity-card">
+            <img src="event2.jpg" alt="حفلة موسيقية">
+            <h3>حفلة موسيقية</h3>
+            <p>اجعل ليلتك مميزة في حفلة موسيقية مع ألمع النجوم في الفن.</p>
+            <button class="cta-button">التسجيل الآن</button>
+        </div>
+
+        <div class="activity-card">
+            <img src="event3.jpg" alt="ورشة ترفيهية">
+            <h3>ورشة ترفيهية</h3>
+            <p>انضم إلى ورش العمل الترفيهية التي نقدمها لتحسين مهاراتك في العروض والتقديم.</p>
+            <button class="cta-button">التسجيل الآن</button>
+        </div>
+
+        <h2>أبرز الأنشطة في هذا الشهر</h2>
+        <div class="activity-card">
+            <img src="event4.jpg" alt="فعالية مميزة">
+            <h3>فعالية مميزة</h3>
+            <p>فعالية فريدة من نوعها هذا الشهر! لا تفوت الفرصة!</p>
+            <button class="cta-button">التسجيل الآن</button>
+        </div>
+
+        <!-- عارض الفيديوهات -->
+        <h2>مشاهد من فعاليات سابقة</h2>
+        <video class="video-player" controls>
+            <source src="event-video.mp4" type="video/mp4">
+            متصفحك لا يدعم مشغل الفيديو.
+        </video>
     </section>
 
     <footer>
