@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الترفيه - وكالة ذيب</title>
+    <title>تشغيل الموسيقى والفيديو - وكالة ذيب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <!-- إضافة FontAwesome لتحميل الأيقونات -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -61,26 +59,31 @@
             background-color: #6A4E23;
             color: #FFD700;
         }
-        .audio-player, .video-player {
+        .media-player {
             margin: 20px auto;
             display: block;
             width: 50%;
         }
-        .service-icons {
-            text-align: center;
-            margin-top: 20px;
+        .media-list {
+            list-style: none;
+            padding: 0;
         }
-        .service-icons i {
-            font-size: 40px;
-            margin: 20px;
+        .media-item {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
             cursor: pointer;
+        }
+        .media-item:hover {
+            background-color: #b0b0b0;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>الترفيه</h1>
-        <p>استمتع بالأنشطة الترفيهية التي نقدمها للمذيعين والعملاء في وكالة ذيب</p>
+        <h1>تشغيل الموسيقى والفيديو</h1>
+        <p>استمتع بالمحتوى الترفيهي الذي تقدمه وكالة ذيب</p>
     </header>
 
     <nav>
@@ -88,32 +91,24 @@
     </nav>
 
     <section>
-        <h2>أنشطتنا الترفيهية</h2>
-        <p>نقدم لك مجموعة من الأنشطة الترفيهية التي تضمن لك قضاء وقت ممتع. من الحفلات الموسيقية والعروض الكوميدية إلى ورش العمل الترفيهية، هناك دائمًا شيء مثير لك!</p>
+        <h2>رفع وتشغيل الموسيقى والفيديو</h2>
 
-        <!-- عرض أيقونات YouTube و SoundCloud و Spotify -->
-        <div class="service-icons">
-            <!-- أيقونة YouTube -->
-            <i class="fab fa-youtube" onclick="window.open('https://www.youtube.com', '_blank')"></i>
-            <!-- أيقونة SoundCloud -->
-            <i class="fab fa-soundcloud" onclick="window.open('https://www.soundcloud.com', '_blank')"></i>
-            <!-- أيقونة Spotify -->
-            <i class="fab fa-spotify" onclick="window.open('https://www.spotify.com', '_blank')"></i>
+        <!-- رفع ملفات موسيقى وفيديو -->
+        <h3>رفع ملفات الموسيقى والفيديو</h3>
+        <input type="file" id="fileInput" accept="audio/*, video/*" multiple onchange="handleFiles()">
+        
+        <!-- قائمة الملفات المرفوعة -->
+        <ul id="mediaList" class="media-list"></ul>
+
+        <!-- مشغل الموسيقى والفيديو -->
+        <div id="mediaPlayerContainer">
+            <audio id="audioPlayer" class="media-player" controls style="display:none;">
+                متصفحك لا يدعم مشغل الصوت.
+            </audio>
+            <video id="videoPlayer" class="media-player" controls style="display:none;">
+                متصفحك لا يدعم مشغل الفيديو.
+            </video>
         </div>
-
-        <h3>رفع وتشغيل الموسيقى من جهازك</h3>
-        <!-- رفع وتشغيل ملف موسيقى -->
-        <input type="file" id="audioInput" accept="audio/*" onchange="playAudio()">
-        <audio id="audioPlayer" class="audio-player" controls>
-            متصفحك لا يدعم مشغل الصوت.
-        </audio>
-
-        <h3>رفع وتشغيل الفيديو من جهازك</h3>
-        <!-- رفع وتشغيل ملف فيديو -->
-        <input type="file" id="videoInput" accept="video/*" onchange="playVideo()">
-        <video id="videoPlayer" class="video-player" controls>
-            متصفحك لا يدعم مشغل الفيديو.
-        </video>
     </section>
 
     <footer>
@@ -121,26 +116,66 @@
     </footer>
 
     <script>
-        // وظيفة تشغيل الموسيقى
-        function playAudio() {
-            const audioInput = document.getElementById("audioInput");
-            const audioPlayer = document.getElementById("audioPlayer");
+        let mediaFiles = [];
+        let currentMediaIndex = 0;
 
-            const file = audioInput.files[0];
-            const objectURL = URL.createObjectURL(file);
-            audioPlayer.src = objectURL;
-            audioPlayer.play();
+        function handleFiles() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+
+            // إضافة الملفات إلى القائمة
+            mediaFiles = [];
+            for (let i = 0; i < files.length; i++) {
+                mediaFiles.push(files[i]);
+            }
+
+            // عرض الملفات المرفوعة في قائمة
+            const mediaList = document.getElementById('mediaList');
+            mediaList.innerHTML = '';
+            mediaFiles.forEach((file, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'media-item';
+                listItem.textContent = file.name;
+                listItem.onclick = () => playMedia(index);
+                mediaList.appendChild(listItem);
+            });
         }
 
-        // وظيفة تشغيل الفيديو
-        function playVideo() {
-            const videoInput = document.getElementById("videoInput");
-            const videoPlayer = document.getElementById("videoPlayer");
+        function playMedia(index) {
+            const file = mediaFiles[index];
+            const audioPlayer = document.getElementById('audioPlayer');
+            const videoPlayer = document.getElementById('videoPlayer');
 
-            const file = videoInput.files[0];
-            const objectURL = URL.createObjectURL(file);
-            videoPlayer.src = objectURL;
-            videoPlayer.play();
+            // إخفاء مشغل الصوت والفيديو
+            audioPlayer.style.display = 'none';
+            videoPlayer.style.display = 'none';
+
+            const fileURL = URL.createObjectURL(file);
+
+            // إذا كان الملف صوتي
+            if (file.type.startsWith('audio')) {
+                audioPlayer.src = fileURL;
+                audioPlayer.style.display = 'block';
+                audioPlayer.play();
+                audioPlayer.onended = nextMedia;
+            } 
+            // إذا كان الملف فيديو
+            else if (file.type.startsWith('video')) {
+                videoPlayer.src = fileURL;
+                videoPlayer.style.display = 'block';
+                videoPlayer.play();
+                videoPlayer.onended = nextMedia;
+            }
+        }
+
+        function nextMedia() {
+            currentMediaIndex++;
+            if (currentMediaIndex < mediaFiles.length) {
+                playMedia(currentMediaIndex);
+            } else {
+                alert("لقد تم تشغيل جميع الملفات.");
+                currentMediaIndex = 0; // إعادة تشغيل من البداية
+            }
         }
     </script>
 </body>
