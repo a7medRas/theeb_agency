@@ -5,37 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تشغيل الموسيقى والفيديو - وكالة ذيب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #6A4E23, #FFD700); /* خلفية متدرجة */
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #6A4E23;
             color: #FFD700;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            background-color: #5A3D1D;
+            border-bottom: 5px solid #FFD700;
         }
         header h1 {
             margin: 0;
+            font-size: 36px;
         }
         nav {
-            background-color: #5A3D1D;
-            padding: 10px;
+            background-color: #6A4E23;
+            padding: 15px;
             text-align: center;
         }
         nav a {
             color: #FFD700;
             text-decoration: none;
             margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         section {
-            padding: 20px;
-            margin: 10px;
+            padding: 30px;
+            margin: 20px;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         footer {
             background-color: #6A4E23;
@@ -49,24 +56,30 @@
         .cta-button {
             background-color: #FFD700;
             color: #5A3D1D;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
             font-weight: bold;
             border-radius: 5px;
+            transition: transform 0.3s ease;
         }
         .cta-button:hover {
             background-color: #6A4E23;
             color: #FFD700;
+            transform: scale(1.1);
         }
         .media-player {
             margin: 20px auto;
             display: block;
-            width: 50%;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .media-list {
             list-style: none;
             padding: 0;
+            margin-top: 20px;
         }
         .media-item {
             background-color: #e0e0e0;
@@ -74,9 +87,37 @@
             margin: 5px 0;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         .media-item:hover {
             background-color: #b0b0b0;
+        }
+        .service-icons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .service-icons i {
+            font-size: 50px;
+            margin: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .service-icons i:hover {
+            transform: scale(1.2);
+            color: #FFD700;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .progress-bar div {
+            height: 100%;
+            background-color: #FFD700;
+            width: 0;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -108,6 +149,18 @@
             <video id="videoPlayer" class="media-player" controls style="display:none;">
                 متصفحك لا يدعم مشغل الفيديو.
             </video>
+
+            <!-- شريط التقدم -->
+            <div class="progress-bar">
+                <div id="progressBar" style="width: 0;"></div>
+            </div>
+        </div>
+
+        <!-- أيقونات خدمات الموسيقى والفيديو -->
+        <div class="service-icons">
+            <i class="fab fa-youtube" onclick="window.open('https://www.youtube.com', '_blank')"></i>
+            <i class="fab fa-soundcloud" onclick="window.open('https://www.soundcloud.com', '_blank')"></i>
+            <i class="fab fa-spotify" onclick="window.open('https://www.spotify.com', '_blank')"></i>
         </div>
     </section>
 
@@ -145,6 +198,7 @@
             const file = mediaFiles[index];
             const audioPlayer = document.getElementById('audioPlayer');
             const videoPlayer = document.getElementById('videoPlayer');
+            const progressBar = document.getElementById('progressBar');
 
             // إخفاء مشغل الصوت والفيديو
             audioPlayer.style.display = 'none';
@@ -158,6 +212,9 @@
                 audioPlayer.style.display = 'block';
                 audioPlayer.play();
                 audioPlayer.onended = nextMedia;
+                audioPlayer.ontimeupdate = () => {
+                    progressBar.style.width = (audioPlayer.currentTime / audioPlayer.duration) * 100 + '%';
+                };
             } 
             // إذا كان الملف فيديو
             else if (file.type.startsWith('video')) {
@@ -165,6 +222,9 @@
                 videoPlayer.style.display = 'block';
                 videoPlayer.play();
                 videoPlayer.onended = nextMedia;
+                videoPlayer.ontimeupdate = () => {
+                    progressBar.style.width = (videoPlayer.currentTime / videoPlayer.duration) * 100 + '%';
+                };
             }
         }
 
