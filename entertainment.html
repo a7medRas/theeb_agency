@@ -46,11 +46,6 @@
             width: 100%;
             bottom: 0;
         }
-        .audio-player, .video-player {
-            margin: 20px auto;
-            display: block;
-            width: 50%;
-        }
         .cta-button {
             background-color: #FFD700;
             color: #5A3D1D;
@@ -63,6 +58,11 @@
         .cta-button:hover {
             background-color: #6A4E23;
             color: #FFD700;
+        }
+        .audio-player, .video-player {
+            margin: 20px auto;
+            display: block;
+            width: 50%;
         }
     </style>
 </head>
@@ -80,48 +80,34 @@
         <h2>أنشطتنا الترفيهية</h2>
         <p>نقدم لك مجموعة من الأنشطة الترفيهية التي تضمن لك قضاء وقت ممتع. من الحفلات الموسيقية والعروض الكوميدية إلى ورش العمل الترفيهية، هناك دائمًا شيء مثير لك!</p>
 
-        <!-- رفع وتشغيل ملف الموسيقى -->
-        <h3>اختر ملف موسيقى لتشغيله</h3>
-        <input type="file" id="audioInput" accept="audio/*" onchange="playAudio()">
-        <audio id="audioPlayer" class="audio-player" controls>
+        <!-- قائمة تشغيل الموسيقى -->
+        <h3>قائمة تشغيل الموسيقى</h3>
+        <audio controls>
+            <source src="song1.mp3" type="audio/mp3">
+            <source src="song2.mp3" type="audio/mp3">
+            <source src="song3.mp3" type="audio/mp3">
             متصفحك لا يدعم مشغل الصوت.
         </audio>
 
-        <!-- رفع وتشغيل ملف الفيديو -->
-        <h3>اختر ملف فيديو لتشغيله</h3>
-        <input type="file" id="videoInput" accept="video/*" onchange="playVideo()">
-        <video id="videoPlayer" class="video-player" controls>
-            متصفحك لا يدعم مشغل الفيديو.
-        </video>
+        <!-- YouTube -->
+        <h3>استماع إلى YouTube</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+        <!-- SoundCloud -->
+        <h3>استماع إلى SoundCloud</h3>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/TRACK_ID&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false"></iframe>
+
+        <!-- Spotify -->
+        <h3>استماع إلى Spotify</h3>
+        <iframe src="https://open.spotify.com/embed/track/TRACK_ID" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+        <!-- بث مباشر -->
+        <h3>بث مباشر</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=CHANNEL_ID" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <footer>
         <p>&copy; 2025 وكالة ذيب - جميع الحقوق محفوظة</p>
     </footer>
-
-    <script>
-        // وظيفة تشغيل الموسيقى
-        function playAudio() {
-            const audioInput = document.getElementById("audioInput");
-            const audioPlayer = document.getElementById("audioPlayer");
-
-            const file = audioInput.files[0];
-            const objectURL = URL.createObjectURL(file);
-            audioPlayer.src = objectURL;
-            audioPlayer.play();
-        }
-
-        // وظيفة تشغيل الفيديو
-        function playVideo() {
-            const videoInput = document.getElementById("videoInput");
-            const videoPlayer = document.getElementById("videoPlayer");
-
-            const file = videoInput.files[0];
-            const objectURL = URL.createObjectURL(file);
-            videoPlayer.src = objectURL;
-            videoPlayer.play();
-        }
-    </script>
 </body>
 </html>
