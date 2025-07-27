@@ -130,8 +130,8 @@
             box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
         }
 
-        /* قائمة التشغيل */
-        .media-list {
+        /* تحسين عرض القائمة */
+        .radio-list {
             list-style: none;
             padding: 0;
             margin-top: 20px;
@@ -139,7 +139,7 @@
             max-height: 300px;
         }
 
-        .media-item {
+        .radio-item {
             background-color: #e0e0e0;
             padding: 10px;
             margin: 5px 0;
@@ -148,7 +148,7 @@
             transition: background-color 0.3s, transform 0.3s ease;
         }
 
-        .media-item:hover {
+        .radio-item:hover {
             background-color: #b0b0b0;
             transform: translateX(10px);
         }
@@ -222,7 +222,7 @@
         <h3>رفع ملفات الموسيقى والفيديو</h3>
         <input type="file" id="fileInput" accept="audio/*, video/*" multiple onchange="handleFiles()">
         
-        <ul id="mediaList"></ul>
+        <ul id="mediaList" class="media-list"></ul>
 
         <!-- مشغل الموسيقى والفيديو -->
         <div id="mediaPlayerContainer">
@@ -239,11 +239,12 @@
             </div>
         </div>
 
-        <h3>راديو مباشر</h3>
-        <audio id="radioPlayer" class="media-player" controls>
-            <source src="https://your-radio-stream-url.com" type="audio/mp3">
-            متصفحك لا يدعم مشغل الصوت.
-        </audio>
+        <h3>محطات راديو مباشرة</h3>
+        <ul id="radioList" class="radio-list">
+            <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2f7f4d30a/listen')">القرآن الكريم</li>
+            <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2402feee9/listen')">راديو 9090</li>
+            <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s46b1c071f/listen')">راديو النيل</li>
+        </ul>
 
         <!-- أيقونات خدمات الموسيقى والفيديو -->
         <div class="service-icons">
@@ -322,6 +323,14 @@
                 alert("لقد تم تشغيل جميع الملفات.");
                 currentMediaIndex = 0;
             }
+        }
+
+        function playRadio(url) {
+            const radioPlayer = document.createElement('audio');
+            radioPlayer.setAttribute('controls', 'true');
+            radioPlayer.setAttribute('autoplay', 'true');
+            radioPlayer.innerHTML = `<source src="${url}" type="audio/mp3">`;
+            document.getElementById('mediaPlayerContainer').appendChild(radioPlayer);
         }
 
         function toggleNightMode() {
