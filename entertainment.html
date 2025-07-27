@@ -15,7 +15,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* تحسين التنسيق */
         header {
             color: #FFD700;
             padding: 20px;
@@ -95,7 +94,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* شريط التقدم */
         .progress-bar {
             width: 100%;
             height: 10px;
@@ -111,7 +109,6 @@
             border-radius: 5px;
         }
 
-        /* أيقونات الخدمات */
         .service-icons {
             text-align: center;
             margin-top: 30px;
@@ -130,13 +127,14 @@
             box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
         }
 
-        /* تحسين عرض القائمة */
         .radio-list {
             list-style: none;
             padding: 0;
             margin-top: 20px;
             overflow-y: scroll;
             max-height: 300px;
+            display: none; /* مخفي في البداية */
+            transition: display 0.3s ease;
         }
 
         .radio-item {
@@ -151,6 +149,18 @@
         .radio-item:hover {
             background-color: #b0b0b0;
             transform: translateX(10px);
+        }
+
+        .radio-icon {
+            font-size: 50px;
+            cursor: pointer;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
+
+        .radio-icon:hover {
+            transform: scale(1.2);
+            color: #6A4E23;
         }
 
         /* تحسين العرض على الموبايل */
@@ -240,6 +250,8 @@
         </div>
 
         <h3>محطات راديو مباشرة</h3>
+        <div class="radio-icon" onclick="toggleRadioList()">🎙️</div> <!-- أيقونة الراديو -->
+        
         <ul id="radioList" class="radio-list">
             <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2f7f4d30a/listen')">القرآن الكريم</li>
             <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2402feee9/listen')">راديو 9090</li>
@@ -345,6 +357,11 @@
             radioPlayer.setAttribute('autoplay', 'true');
             radioPlayer.innerHTML = `<source src="${url}" type="audio/mp3">`;
             document.getElementById('mediaPlayerContainer').appendChild(radioPlayer);
+        }
+
+        function toggleRadioList() {
+            const radioList = document.getElementById('radioList');
+            radioList.style.display = radioList.style.display === 'none' ? 'block' : 'none';
         }
 
         function toggleNightMode() {
