@@ -112,29 +112,54 @@
         .service-icons {
             text-align: center;
             margin-top: 30px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
         }
 
         .service-icons i {
             font-size: 50px;
-            margin: 20px;
+            margin: 0 15px;
             cursor: pointer;
+            color: #FFD700;
             transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .service-icons i:hover {
             transform: scale(1.2);
-            color: #FFD700;
+            color: #6A4E23;
             box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.8);
         }
 
+        /* إضافة أيقونة الراديو بجانب الأيقونات الأخرى */
+        .radio-icon {
+            font-size: 50px;
+            cursor: pointer;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
+
+        .radio-icon:hover {
+            transform: scale(1.2);
+            color: #6A4E23;
+        }
+
+        /* قائمة الراديو المخفية */
         .radio-list {
             list-style: none;
             padding: 0;
             margin-top: 20px;
-            overflow-y: scroll;
-            max-height: 300px;
             display: none; /* مخفي في البداية */
-            transition: display 0.3s ease;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .radio-item {
@@ -149,18 +174,6 @@
         .radio-item:hover {
             background-color: #b0b0b0;
             transform: translateX(10px);
-        }
-
-        .radio-icon {
-            font-size: 50px;
-            cursor: pointer;
-            color: #FFD700;
-            transition: transform 0.3s ease;
-        }
-
-        .radio-icon:hover {
-            transform: scale(1.2);
-            color: #6A4E23;
         }
 
         /* تحسين العرض على الموبايل */
@@ -193,7 +206,6 @@
             }
         }
 
-        /* تحسين العرض على الهواتف الصغيرة */
         @media (max-width: 480px) {
             header h1 {
                 font-size: 24px;
@@ -250,8 +262,11 @@
         </div>
 
         <h3>محطات راديو مباشرة</h3>
-        <div class="radio-icon" onclick="toggleRadioList()">🎙️</div> <!-- أيقونة الراديو -->
-        
+
+        <!-- أيقونة الراديو -->
+        <div class="radio-icon" onclick="toggleRadioList()">🎙️</div>
+
+        <!-- قائمة محطات الراديو المخفية -->
         <ul id="radioList" class="radio-list">
             <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2f7f4d30a/listen')">القرآن الكريم</li>
             <li class="radio-item" onclick="playRadio('https://streaming.radio.co/s2402feee9/listen')">راديو 9090</li>
